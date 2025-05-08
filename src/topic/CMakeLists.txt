@@ -194,6 +194,8 @@ target_link_libraries(Hello_sub
 catkin_install_python(PROGRAMS
   scripts/talker_p.py
   scripts/listener_p.py
+  scripts/person_talker.py
+  scripts/person_listener.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
