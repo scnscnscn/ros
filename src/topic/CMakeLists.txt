@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -67,11 +68,18 @@ find_package(catkin REQUIRED COMPONENTS
 #   Action2.action
 # )
 
-## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
-# )
+# 配置 msg 源文件
+add_message_files(
+  FILES
+  Person.msg
+)
+
+# Generate added messages and services with any dependencies listed here
+generate_messages(
+  DEPENDENCIES
+  std_msgs  # Or other packages containing msgs
+)
+
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -101,14 +109,13 @@ find_package(catkin REQUIRED COMPONENTS
 ## INCLUDE_DIRS: uncomment this if your package contains header files
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
-## DEPENDS: system dependencies of this project that dependent projects also need
+#执行时依赖
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES topic
-#  CATKIN_DEPENDS roscpp rospy std_msg
+#  LIBRARIES demo02_talker_listener
+  CATKIN_DEPENDS roscpp rospy std_msgs message_runtime
 #  DEPENDS system_lib
 )
-
 ###########
 ## Build ##
 ###########
@@ -138,6 +145,19 @@ add_executable(Hello_pub
 )
 add_executable(Hello_sub
   src/Hello_sub.cpp
+)
+
+add_executable(person_talker src/person_talker.cpp)
+add_executable(person_listener src/person_listener.cpp)
+
+add_dependencies(person_talker ${PROJECT_NAME}_generate_messages_cpp)
+add_dependencies(person_listener ${PROJECT_NAME}_generate_messages_cpp)
+
+target_link_libraries(person_talker
+  ${catkin_LIBRARIES}
+)
+target_link_libraries(person_listener
+  ${catkin_LIBRARIES}
 )
 
 target_link_libraries(Hello_pub
