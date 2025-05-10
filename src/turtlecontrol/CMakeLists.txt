@@ -136,6 +136,8 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(turtlecontrol_node src/turtlecontrol_node.cpp)
 add_executable(turtlecontrol_listen src/turtlecontrol_listen.cpp)
+add_executable(turtlemaker src/turtlemaker.cpp)
+add_executable(changebackgroundcolor src/changebackgroundcolor.cpp)
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -152,6 +154,12 @@ target_link_libraries(turtlecontrol_node
 target_link_libraries(turtlecontrol_listen
   ${catkin_LIBRARIES}
 )
+target_link_libraries(turtlemaker
+  ${catkin_LIBRARIES}
+)
+target_link_libraries(changebackgroundcolor
+  ${catkin_LIBRARIES}
+)
 #############
 ## Install ##
 #############
@@ -164,6 +172,8 @@ target_link_libraries(turtlecontrol_listen
 catkin_install_python(PROGRAMS
   scripts/turtlecontrol_p.py
   scripts/turtlecontrol_listen_p.py
+  scripts/turtlemaker_p.py
+  scripts/changebackgroundcolor_p.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
