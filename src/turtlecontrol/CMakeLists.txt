@@ -135,7 +135,7 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(turtlecontrol_node src/turtlecontrol_node.cpp)
-
+add_executable(turtlecontrol_listen src/turtlecontrol_listen.cpp)
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -149,7 +149,9 @@ add_executable(turtlecontrol_node src/turtlecontrol_node.cpp)
 target_link_libraries(turtlecontrol_node
   ${catkin_LIBRARIES}
 )
-
+target_link_libraries(turtlecontrol_listen
+  ${catkin_LIBRARIES}
+)
 #############
 ## Install ##
 #############
@@ -161,6 +163,7 @@ target_link_libraries(turtlecontrol_node
 ## in contrast to setup.py, you can choose the destination
 catkin_install_python(PROGRAMS
   scripts/turtlecontrol_p.py
+  scripts/turtlecontrol_listen_p.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
